@@ -3,701 +3,495 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crimes em Espécie — Guia de Estudo N2</title>
+<title>Recursos Cíveis — Guia de Estudo N2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#E7E9E4;
+    --paper:#E9EBE6;
     --card:#FBFBF8;
-    --card-2:#F4F2EC;
-    --ink:#1B2026;
-    --ink-soft:#4C535B;
+    --card-2:#F3F2EC;
+    --ink:#161D2B;
+    --ink-soft:#49505C;
     --ink-faint:#7A8089;
-    --oxblood:#8E2A3B;
-    --oxblood-deep:#681E2B;
+    --navy:#1E3A5F;       /* STJ / REsp */
+    --navy-deep:#152B47;
+    --crimson:#7D2335;    /* STF / RE */
+    --teal:#2C6E63;       /* TJ/TRF / Agravo */
     --marker:#EBD94B;
     --marker-soft:#F2E88F;
     --rule:#D2D4CE;
     --green:#3E6B4F;
-    --shadow:0 1px 0 rgba(27,32,38,.04), 0 8px 24px -16px rgba(27,32,38,.4);
+    --shadow:0 1px 0 rgba(22,29,43,.04), 0 8px 24px -16px rgba(22,29,43,.4);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:"Spectral",Georgia,serif;font-size:17px;line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:"IBM Plex Mono",monospace}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Spectral",Georgia,serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   h1,h2,h3,.disp{font-family:"Oswald",sans-serif;font-weight:600;letter-spacing:.01em}
+  .mono{font-family:"IBM Plex Mono",monospace}
 
   /* ---------- top bar ---------- */
-  header.bar{
-    position:sticky;top:0;z-index:50;background:rgba(27,32,38,.97);
-    color:#EDEDE7;border-bottom:2px solid var(--oxblood);
-    backdrop-filter:blur(6px);
-  }
+  header.bar{position:sticky;top:0;z-index:50;background:rgba(22,29,43,.97);color:#EDEDE7;border-bottom:2px solid var(--marker);backdrop-filter:blur(6px)}
   .bar-in{max-width:1120px;margin:0 auto;padding:.55rem 1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
   .bar .brand{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:.92rem}
   .bar .brand b{color:var(--marker)}
   .bar nav{margin-left:auto;display:flex;gap:.15rem;flex-wrap:wrap}
-  .bar nav a{
-    color:#C9CBC4;text-decoration:none;font-family:"IBM Plex Mono";font-size:.72rem;
-    text-transform:uppercase;letter-spacing:.06em;padding:.3rem .5rem;border-radius:3px;
-  }
+  .bar nav a{color:#C9CBC4;text-decoration:none;font-family:"IBM Plex Mono";font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;padding:.3rem .5rem;border-radius:3px}
   .bar nav a:hover,.bar nav a:focus{color:var(--marker);background:rgba(255,255,255,.06)}
 
   /* ---------- hero ---------- */
-  .hero{max-width:1120px;margin:0 auto;padding:3.2rem 1.25rem 1.5rem}
-  .eyebrow{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oxblood);font-weight:600}
-  .hero h1{
-    font-size:clamp(2.6rem,8vw,5.2rem);line-height:.94;margin:.5rem 0 .4rem;
-    text-transform:uppercase;font-weight:700;letter-spacing:.005em;
-  }
+  .hero{max-width:1120px;margin:0 auto;padding:3rem 1.25rem 1.4rem}
+  .eyebrow{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);font-weight:600}
+  .hero h1{font-size:clamp(2.4rem,8vw,4.8rem);line-height:.94;margin:.5rem 0 .4rem;text-transform:uppercase;font-weight:700}
   .hero h1 .thin{font-weight:300;display:block;color:var(--ink-soft)}
-  .hero p.lead{font-size:1.12rem;max-width:60ch;color:var(--ink-soft);margin:.4rem 0 1.4rem}
-  .codestrip{
-    display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
-    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.9rem 0;
-  }
-  .codestrip .lbl{font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-right:.4rem}
-  .codestrip .art{
-    font-family:"Oswald";font-weight:600;font-size:.86rem;color:var(--oxblood);
-    border:1px solid var(--oxblood);border-radius:3px;padding:.05rem .45rem;background:#fff;
-  }
+  .hero p.lead{font-size:1.1rem;max-width:62ch;color:var(--ink-soft);margin:.4rem 0 1.3rem}
+
+  /* mapa das vias */
+  .mapa{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin-top:.6rem}
+  .via{border-radius:8px;padding:1rem 1.05rem;color:#fff;box-shadow:var(--shadow)}
+  .via.resp{background:linear-gradient(160deg,var(--navy),var(--navy-deep))}
+  .via.re{background:linear-gradient(160deg,var(--crimson),#5C1827)}
+  .via.ai{background:linear-gradient(160deg,var(--teal),#1E4F47)}
+  .via .corte{font-family:"IBM Plex Mono";font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .via .nm{font-family:"Oswald";font-weight:600;font-size:1.25rem;text-transform:uppercase;margin:.15rem 0 .25rem}
+  .via .base{font-family:"IBM Plex Mono";font-size:.78rem;color:var(--marker);font-weight:600}
+  .via p{font-size:.88rem;margin:.45rem 0 0;opacity:.92}
 
   /* ---------- layout ---------- */
   main{max-width:1120px;margin:0 auto;padding:0 1.25rem 4rem}
   section.grp{padding:2.6rem 0 1rem;border-top:1px solid var(--rule)}
-  .grp-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.3rem;flex-wrap:wrap}
-  .grp-head .titulo{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oxblood);font-weight:600}
+  .grp-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem;flex-wrap:wrap}
+  .grp-head .titulo{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
   .grp-head h2{font-size:clamp(1.5rem,4vw,2.2rem);text-transform:uppercase;margin:0;line-height:1}
-  .grp-sub{color:var(--ink-soft);max-width:65ch;margin:-.4rem 0 1.4rem;font-size:1rem}
-
+  .grp.c-resp .titulo,.grp.c-resp h2{color:var(--navy)}
+  .grp.c-re .titulo,.grp.c-re h2{color:var(--crimson)}
+  .grp.c-ai .titulo,.grp.c-ai h2{color:var(--teal)}
+  .grp-sub{color:var(--ink-soft);max-width:68ch;margin:-.3rem 0 1.3rem;font-size:1rem}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
 
-  /* ---------- ficha (crime card) ---------- */
-  .ficha{
-    position:relative;background:var(--card);border:1px solid var(--rule);border-radius:6px;
-    padding:1.1rem 1.15rem 1.2rem;box-shadow:var(--shadow);overflow:hidden;
-  }
-  .ficha::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--oxblood)}
-  .ficha .art{
-    font-family:"Oswald";font-weight:700;font-size:2.1rem;line-height:.9;color:var(--oxblood);
-    letter-spacing:-.01em;
-  }
-  .ficha .nome{font-family:"Oswald";font-weight:600;font-size:1.18rem;text-transform:uppercase;margin:.15rem 0 .5rem;letter-spacing:.01em}
-  .ficha .tipo{font-size:.97rem;color:var(--ink);margin:0 0 .7rem}
+  /* ---------- ficha ---------- */
+  .ficha{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1.1rem 1.15rem 1.2rem;box-shadow:var(--shadow);overflow:hidden}
+  .ficha::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--navy)}
+  .grp.c-re .ficha::before{background:var(--crimson)}
+  .grp.c-ai .ficha::before{background:var(--teal)}
+  .ficha .art{font-family:"Oswald";font-weight:700;font-size:1.5rem;line-height:1;letter-spacing:-.01em}
+  .grp.c-resp .ficha .art{color:var(--navy)}
+  .grp.c-re .ficha .art{color:var(--crimson)}
+  .grp.c-ai .ficha .art{color:var(--teal)}
+  .ficha .nome{font-family:"Oswald";font-weight:600;font-size:1.12rem;text-transform:uppercase;margin:.15rem 0 .5rem}
+  .ficha .tipo{font-size:.96rem;margin:0 0 .6rem}
   .ficha ul{margin:.2rem 0 0;padding-left:1.05rem}
   .ficha li{font-size:.92rem;color:var(--ink-soft);margin:.28rem 0;line-height:1.45}
   .ficha li b{color:var(--ink)}
-  .kw{
-    background-image:linear-gradient(120deg,var(--marker) 0,var(--marker) 100%);
-    background-repeat:no-repeat;background-size:100% .55em;background-position:0 .72em;
-    padding:0 .08em;font-weight:600;color:var(--ink);
-  }
-  .tag{
-    display:inline-block;font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.08em;
-    text-transform:uppercase;padding:.12rem .4rem;border-radius:3px;margin:.5rem .3rem 0 0;
-    background:var(--card-2);border:1px solid var(--rule);color:var(--ink-soft);font-weight:500;
-  }
-  .tag.hot{background:var(--oxblood);color:#fff;border-color:var(--oxblood)}
-  .tag.sum{background:#21262d;color:var(--marker);border-color:#21262d}
-
-  /* spanning ficha */
+  .kw{background-image:linear-gradient(120deg,var(--marker) 0,var(--marker) 100%);background-repeat:no-repeat;background-size:100% .55em;background-position:0 .72em;padding:0 .08em;font-weight:600;color:var(--ink)}
+  .tag{display:inline-block;font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.12rem .4rem;border-radius:3px;margin:.5rem .3rem 0 0;background:var(--card-2);border:1px solid var(--rule);color:var(--ink-soft);font-weight:500}
+  .tag.hot{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+  .tag.sum{background:#1c2230;color:var(--marker);border-color:#1c2230}
   .ficha.wide{grid-column:1/-1}
 
-  /* alerta / latrocínio */
-  .alerta{
-    grid-column:1/-1;background:linear-gradient(180deg,#241015,#1B2026);color:#ECEAE3;
-    border:none;border-radius:8px;padding:1.5rem 1.4rem;box-shadow:var(--shadow);position:relative;overflow:hidden;
-  }
+  /* alerta escuro */
+  .alerta{grid-column:1/-1;background:linear-gradient(180deg,#101a2c,#161D2B);color:#ECEAE3;border:none;border-radius:8px;padding:1.5rem 1.4rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
   .alerta::before{display:none}
-  .alerta .stamp{
-    position:absolute;right:1rem;top:1rem;font-family:"Oswald";font-weight:700;font-size:.7rem;
-    letter-spacing:.18em;color:var(--marker);border:2px solid var(--marker);padding:.25rem .55rem;border-radius:4px;
-    transform:rotate(6deg);text-transform:uppercase;opacity:.92;
-  }
-  .alerta h3{font-size:1.5rem;text-transform:uppercase;margin:.1rem 0 .2rem;color:#fff}
+  .alerta .stamp{position:absolute;right:1rem;top:1rem;font-family:"Oswald";font-weight:700;font-size:.68rem;letter-spacing:.18em;color:var(--marker);border:2px solid var(--marker);padding:.25rem .55rem;border-radius:4px;transform:rotate(6deg);text-transform:uppercase}
+  .alerta h3{font-size:1.4rem;text-transform:uppercase;margin:.1rem 0 .2rem;color:#fff}
   .alerta .art{color:var(--marker);font-family:"Oswald";font-weight:600;font-size:.95rem}
-  .alerta p{color:#CFCEC6;font-size:.98rem;margin:.6rem 0}
+  .alerta p{color:#CFCEC6;font-size:.97rem;margin:.6rem 0}
   .alerta .sumula{border-left:3px solid var(--marker);padding:.35rem 0 .35rem .8rem;margin:.7rem 0;font-size:.95rem}
   .alerta .sumula b{color:var(--marker)}
-  .tbl-mini{width:100%;border-collapse:collapse;margin-top:.9rem;font-family:"IBM Plex Mono";font-size:.8rem}
-  .tbl-mini th,.tbl-mini td{border:1px solid rgba(255,255,255,.18);padding:.45rem .6rem;text-align:left;color:#D9D8D1}
-  .tbl-mini th{background:rgba(255,255,255,.05);text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;color:var(--marker)}
-  .tbl-mini td .c{color:#9ED7A8;font-weight:600}
-  .tbl-mini td .t{color:#E7B7B0;font-weight:600}
 
   /* nota box */
-  .nota{
-    grid-column:1/-1;background:var(--card-2);border:1px dashed var(--oxblood);border-radius:6px;
-    padding:1rem 1.1rem;font-size:.95rem;color:var(--ink-soft);
-  }
+  .nota{grid-column:1/-1;background:var(--card-2);border:1px dashed var(--crimson);border-radius:6px;padding:1rem 1.1rem;font-size:.95rem;color:var(--ink-soft)}
   .nota::before{display:none}
-  .nota b{color:var(--oxblood)}
-  .nota .icn{font-family:"Oswald";font-weight:700;color:var(--oxblood);margin-right:.4rem}
+  .nota b{color:var(--crimson)}
+  .nota .icn{font-family:"Oswald";font-weight:700;color:var(--crimson);margin-right:.4rem}
 
-  /* ---------- distinções (comparison) ---------- */
+  /* fluxo / steps */
+  .fluxo{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem;counter-reset:step}
+  .step{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.85rem .9rem;position:relative;box-shadow:var(--shadow)}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;top:-.65rem;left:.7rem;background:var(--ink);color:var(--marker);font-family:"Oswald";font-weight:700;font-size:.8rem;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .step .h{font-family:"Oswald";font-weight:600;font-size:.88rem;text-transform:uppercase;margin:.25rem 0 .2rem}
+  .step p{font-size:.82rem;color:var(--ink-soft);margin:0;line-height:1.4}
+  .step .ref{font-family:"IBM Plex Mono";font-size:.68rem;color:var(--navy);font-weight:600}
+
+  /* comparação */
   .vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin:.4rem 0 1rem}
-  .vs .col{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.05rem;box-shadow:var(--shadow);position:relative}
-  .vs .col .h{font-family:"Oswald";font-weight:600;text-transform:uppercase;font-size:1.02rem;margin-bottom:.15rem}
-  .vs .col .art{font-family:"IBM Plex Mono";font-size:.7rem;color:var(--oxblood);letter-spacing:.06em;font-weight:600}
-  .vs .col p{font-size:.92rem;color:var(--ink-soft);margin:.5rem 0 0}
-  .vs .col .key{font-size:.92rem;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--rule);color:var(--ink)}
-  .vs .col .key b{color:var(--oxblood)}
-  .macete{
-    background:var(--marker-soft);border:1px solid #D8C84A;border-radius:6px;
-    padding:.7rem 1rem;font-size:.95rem;margin:.2rem 0 1.6rem;color:#3B3410;
-  }
-  .macete b{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+  .vs .col{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.05rem;box-shadow:var(--shadow)}
+  .vs .col .h{font-family:"Oswald";font-weight:600;text-transform:uppercase;font-size:1rem;margin-bottom:.1rem}
+  .vs .col .art{font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.06em;font-weight:600;color:var(--navy)}
+  .vs .col p{font-size:.9rem;color:var(--ink-soft);margin:.5rem 0 0}
+  .vs .col .key{font-size:.9rem;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--rule);color:var(--ink)}
+  .vs .col .key b{color:var(--crimson)}
+  .macete{background:var(--marker-soft);border:1px solid #D8C84A;border-radius:6px;padding:.7rem 1rem;font-size:.95rem;margin:.2rem 0 1.6rem;color:#3B3410}
+  .macete b{font-family:"Oswald";font-weight:600;text-transform:uppercase}
+
+  table.cmp{width:100%;border-collapse:collapse;font-size:.86rem;margin:.3rem 0 1.4rem;background:var(--card);box-shadow:var(--shadow)}
+  table.cmp th{font-family:"Oswald";font-weight:600;text-transform:uppercase;font-size:.74rem;letter-spacing:.06em;background:var(--ink);color:#EDEDE7;padding:.55rem .7rem;text-align:left}
+  table.cmp th.resp{background:var(--navy)} table.cmp th.re{background:var(--crimson)}
+  table.cmp td{border:1px solid var(--rule);padding:.5rem .7rem;color:var(--ink-soft);vertical-align:top}
+  table.cmp td:first-child{font-family:"IBM Plex Mono";font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);font-weight:600;background:var(--card-2);white-space:nowrap}
+  table.cmp td b{color:var(--ink)}
 
   /* ---------- simulado ---------- */
-  .sim-wrap{border-top:3px solid var(--oxblood);margin-top:2.4rem;padding-top:2.2rem}
-  .sim-intro{background:#1B2026;color:#EDEAE2;border-radius:10px;padding:1.6rem 1.5rem;margin-bottom:1.6rem}
+  .sim-wrap{border-top:3px solid var(--navy);margin-top:2.4rem;padding-top:2.2rem}
+  .sim-intro{background:#161D2B;color:#EDEAE2;border-radius:10px;padding:1.6rem 1.5rem;margin-bottom:1.6rem}
   .sim-intro .eyebrow{color:var(--marker)}
-  .sim-intro h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);text-transform:uppercase;margin:.3rem 0 .4rem}
-  .sim-intro p{color:#C9C8C0;margin:.3rem 0;max-width:64ch;font-size:1rem}
+  .sim-intro h2{color:#fff;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;margin:.3rem 0 .4rem}
+  .sim-intro p{color:#C9C8C0;margin:.3rem 0;max-width:66ch;font-size:1rem}
   .q{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1.3rem 1.4rem;margin-bottom:1.1rem;box-shadow:var(--shadow)}
-  .q .num{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
-  .q .num .n{font-family:"Oswald";font-weight:700;font-size:1.8rem;color:var(--oxblood);line-height:1}
+  .q .num{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap}
+  .q .num .n{font-family:"Oswald";font-weight:700;font-size:1.8rem;line-height:1}
+  .q.qresp .num .n{color:var(--navy)} .q.qre .num .n{color:var(--crimson)} .q.qai .num .n{color:var(--teal)}
   .q .num .theme{font-family:"IBM Plex Mono";font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);background:var(--card-2);border:1px solid var(--rule);padding:.18rem .5rem;border-radius:3px}
-  .q .enun{font-size:1.04rem;color:var(--ink)}
+  .q .caso{font-size:1.02rem;color:var(--ink);background:var(--card-2);border-left:3px solid var(--ink);padding:.7rem .9rem;border-radius:0 6px 6px 0;margin-bottom:.8rem}
+  .q ol.itens{margin:.4rem 0 0;padding-left:0;list-style:none}
+  .q ol.itens li{margin:.5rem 0;font-size:1rem;display:flex;gap:.6rem}
+  .q ol.itens li .let{font-family:"Oswald";font-weight:700;color:var(--ink);min-width:1.4rem}
   details.gab{margin-top:1rem;border-top:1px solid var(--rule);padding-top:.4rem}
-  details.gab summary{
-    list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;
-    font-family:"Oswald";font-weight:600;text-transform:uppercase;font-size:.82rem;letter-spacing:.05em;
-    color:#fff;background:var(--oxblood);padding:.5rem .9rem;border-radius:5px;margin-top:.6rem;
-    transition:background .15s ease;
-  }
+  details.gab summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:"Oswald";font-weight:600;text-transform:uppercase;font-size:.82rem;letter-spacing:.05em;color:#fff;background:var(--navy);padding:.5rem .9rem;border-radius:5px;margin-top:.6rem;transition:background .15s ease}
   details.gab summary::-webkit-details-marker{display:none}
   details.gab summary::before{content:"▸";color:var(--marker);transition:transform .15s ease}
   details.gab[open] summary::before{transform:rotate(90deg)}
-  details.gab summary:hover{background:var(--oxblood-deep)}
+  details.gab summary:hover{background:var(--navy-deep)}
   details.gab summary:focus-visible{outline:3px solid var(--marker);outline-offset:2px}
   .gab-body{margin-top:.9rem;background:var(--card-2);border-left:4px solid var(--green);border-radius:0 6px 6px 0;padding:1rem 1.15rem;font-size:.97rem}
   .gab-body p{margin:.4rem 0}
   .gab-body .label{font-family:"IBM Plex Mono";font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--green);font-weight:600}
+  .gab-body .ref{font-family:"IBM Plex Mono";font-size:.8rem;color:var(--navy)}
   .gab-body b{color:var(--ink)}
-  .gab-body .ref{font-family:"IBM Plex Mono";font-size:.8rem;color:var(--oxblood)}
 
-  /* ---------- footer ---------- */
   footer{max-width:1120px;margin:0 auto;padding:2rem 1.25rem 4rem}
-  .avisos{background:#1B2026;color:#CFCEC6;border-radius:10px;padding:1.5rem 1.5rem}
+  .avisos{background:#161D2B;color:#CFCEC6;border-radius:10px;padding:1.5rem 1.5rem}
   .avisos h3{color:var(--marker);text-transform:uppercase;font-size:1.05rem;letter-spacing:.05em;margin:0 0 .7rem}
   .avisos ul{margin:0;padding-left:1.1rem}
   .avisos li{margin:.45rem 0;font-size:.92rem;line-height:1.5}
   .avisos li b{color:#fff}
 
-  /* reveal animation */
   .rv{opacity:0;transform:translateY(14px)}
   .rv.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
-  @media (prefers-reduced-motion:reduce){
-    .rv{opacity:1;transform:none}
-    html{scroll-behavior:auto}
-  }
-  @media (max-width:560px){
-    body{font-size:16px}
-    .bar nav{display:none}
-    .ficha .art{font-size:1.8rem}
-  }
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+  @media (max-width:560px){body{font-size:16px}.bar nav{display:none}}
 </style>
 </head>
 <body>
 
 <header class="bar">
   <div class="bar-in">
-    <span class="brand">Crimes em <b>Espécie</b> · N2</span>
+    <span class="brand">Recursos <b>Cíveis</b> · N2</span>
     <nav>
-      <a href="#patrimonio">Patrimônio</a>
-      <a href="#imunidades">Imunidades</a>
-      <a href="#saude">Art. 273</a>
-      <a href="#associacao">Associação</a>
-      <a href="#falso">Falso doc.</a>
-      <a href="#adm">Adm. Pública</a>
-      <a href="#estado">Estado Dem.</a>
-      <a href="#distincoes">Distinções</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#resp">REsp</a>
+      <a href="#re">RE</a>
+      <a href="#agravo">Agravo Instr.</a>
+      <a href="#comparativo">REsp × RE</a>
       <a href="#simulado">Simulado</a>
     </nav>
   </div>
 </header>
 
-<div class="hero">
-  <span class="eyebrow">Direito Penal · Parte Especial · Prova com consulta ao código</span>
-  <h1>Crimes em<br>espécie<span class="thin">guia de revisão</span></h1>
-  <p class="lead">Com o Código na mão, o examinador não cobra a letra da lei — cobra <b>classificar a conduta e distinguir crimes parecidos</b>. Este guia foca no verbo que define cada tipo e nas fronteiras entre eles.</p>
-  <div class="codestrip">
-    <span class="lbl">Na prova:</span>
-    <span class="art">155</span><span class="art">156</span><span class="art">157</span><span class="art">158</span><span class="art">159</span><span class="art">160</span><span class="art">168</span><span class="art">171</span><span class="art">180</span><span class="art">180-A</span><span class="art">181–183</span><span class="art">273</span><span class="art">288</span><span class="art">297</span><span class="art">298</span><span class="art">299</span><span class="art">304</span><span class="art">312</span><span class="art">316</span><span class="art">317</span><span class="art">319</span><span class="art">319-A</span><span class="art">333</span><span class="art">339</span><span class="art">342</span><span class="art">359-L</span><span class="art">359-M</span>
+<div class="hero" id="mapa">
+  <span class="eyebrow">Processo Civil · Prova hoje 19h30 · Consulta ao CPC e à CF</span>
+  <h1>Recursos<br>cíveis<span class="thin">REsp · RE · Agravo de Instrumento</span></h1>
+  <p class="lead">Com os códigos na mão, a prova cobra três coisas: <b>cabimento</b> (qual hipótese da CF/CPC se encaixa), <b>requisitos de admissibilidade</b> (prequestionamento, repercussão geral, rol do 1.015) e <b>procedimento</b> (onde interpõe, prazo, o que cabe da inadmissão). Marque os artigos no código antes da prova.</p>
+
+  <div class="mapa">
+    <div class="via resp rv">
+      <span class="corte">Destino: STJ</span>
+      <div class="nm">Recurso Especial</div>
+      <span class="base">CF, art. 105, III · CPC, arts. 1.029–1.041</span>
+      <p>Defende a <b>lei federal</b> e uniformiza sua interpretação. Questão infraconstitucional.</p>
+    </div>
+    <div class="via re rv">
+      <span class="corte">Destino: STF</span>
+      <div class="nm">Recurso Extraordinário</div>
+      <span class="base">CF, art. 102, III · CPC, arts. 1.029–1.041</span>
+      <p>Defende a <b>Constituição</b>. Exige repercussão geral (art. 102, §3º).</p>
+    </div>
+    <div class="via ai rv">
+      <span class="corte">Destino: TJ / TRF</span>
+      <div class="nm">Agravo de Instrumento</div>
+      <span class="base">CPC, arts. 1.015–1.020</span>
+      <p>Ataca <b>decisões interlocutórias</b> nas hipóteses do art. 1.015 (+ Tema 988).</p>
+    </div>
   </div>
 </div>
 
 <main>
 
-<!-- ===================== PATRIMÔNIO ===================== -->
-<section class="grp" id="patrimonio">
-  <div class="grp-head"><span class="titulo">Título II</span><h2>Crimes contra o patrimônio</h2></div>
-  <p class="grp-sub">A linha que separa furto, roubo e extorsão está no <b>meio empregado</b> e no <b>papel da vítima</b>. Marque o verbo de cada tipo.</p>
+<!-- ===================== RESP ===================== -->
+<section class="grp c-resp" id="resp">
+  <div class="grp-head"><span class="titulo">CF art. 105, III + CPC 1.029 ss.</span><h2>Recurso Especial — STJ</h2></div>
+  <p class="grp-sub">Recurso <b>excepcional</b> (de estrito direito): não serve para reexaminar fatos/provas nem injustiça da decisão — serve para corrigir <b>violação à lei federal</b> e uniformizar sua interpretação.</p>
 
   <div class="grid">
 
     <article class="ficha rv">
-      <div class="art">155</div>
-      <div class="nome">Furto</div>
-      <p class="tipo"><span class="kw">Subtrair</span>, para si ou para outrem, coisa alheia móvel — sem violência ou grave ameaça.</p>
+      <div class="art">CF 105, III</div>
+      <div class="nome">Cabimento — pressuposto</div>
+      <p class="tipo">Causas decididas em <span class="kw">única ou última instância</span> pelos <b>TJs ou TRFs</b>.</p>
       <ul>
-        <li><b>§1º</b> furto noturno (repouso noturno) → aumento.</li>
-        <li><b>§2º</b> privilegiado: primário + coisa de pequeno valor.</li>
-        <li><b>§4º</b> qualificado: rompimento de obstáculo, <b>abuso de confiança/fraude</b>, escalada/destreza, concurso de 2+.</li>
+        <li>Exige <b>esgotamento</b> das instâncias ordinárias.</li>
+        <li><b>Súmula 203 STJ:</b> NÃO cabe REsp contra decisão de <b>turma recursal de juizado especial</b> (não é "tribunal").</li>
+        <li>"Causas decididas" → exige <b>prequestionamento</b>.</li>
       </ul>
-      <span class="tag hot">furto mediante fraude ≠ estelionato</span>
-      <span class="tag">insignificância pode atipicar</span>
+      <span class="tag sum">Súmula 203 STJ</span>
     </article>
 
     <article class="ficha rv">
-      <div class="art">156</div>
-      <div class="nome">Furto de coisa comum</div>
-      <p class="tipo">Subtrair o <b>condômino, coerdeiro ou sócio</b> coisa comum.</p>
+      <div class="art">Alíneas a, b, c</div>
+      <div class="nome">As 3 hipóteses</div>
       <ul>
-        <li>Crime próprio.</li>
-        <li>Ação penal <b>condicionada à representação</b>.</li>
-        <li>Atípico se coisa fungível dentro da quota do agente.</li>
+        <li><b>a)</b> decisão que <span class="kw">contrariar tratado ou lei federal, ou negar-lhes vigência</span>;</li>
+        <li><b>b)</b> julgar válido <b>ato de governo local</b> contestado em face de <b>lei federal</b>;</li>
+        <li><b>c)</b> der à lei federal <span class="kw">interpretação divergente</span> da de outro tribunal (<b>dissídio jurisprudencial</b>).</li>
       </ul>
+      <span class="tag">alínea c exige cotejo analítico — art. 1.029, §1º CPC</span>
     </article>
 
     <article class="ficha rv">
-      <div class="art">157</div>
-      <div class="nome">Roubo</div>
-      <p class="tipo">Subtrair coisa alheia móvel mediante <span class="kw">violência ou grave ameaça</span> à pessoa.</p>
+      <div class="art">Prequestionamento</div>
+      <div class="nome">Requisito-chave</div>
+      <p class="tipo">A questão federal deve ter sido <span class="kw">enfrentada na decisão recorrida</span>.</p>
       <ul>
-        <li><b>Próprio (caput):</b> violência/ameaça é o meio para subtrair.</li>
-        <li><b>Impróprio (§1º):</b> subtrai sem violência e, <b>logo depois</b>, a emprega p/ assegurar a posse/impunidade.</li>
-        <li><b>§2º/§2º-A/§2º-B:</b> majorantes — concurso, restrição da liberdade, arma branca, arma de fogo (uso restrito/proibido aumenta mais).</li>
+        <li><b>Súmulas 282 e 356 STF</b> (aplicáveis por analogia ao REsp).</li>
+        <li><b>Art. 1.025 CPC — prequestionamento ficto:</b> elementos suscitados nos <b>embargos de declaração</b> consideram-se incluídos no acórdão, ainda que inadmitidos/rejeitados, se o tribunal superior reconhecer erro/omissão.</li>
       </ul>
-      <span class="tag">o agente TOMA o bem</span>
+      <span class="tag hot">art. 1.025 CPC cai muito</span>
     </article>
 
-    <!-- LATROCÍNIO destaque -->
+    <article class="ficha rv">
+      <div class="art">Súmula 7 STJ</div>
+      <div class="nome">Vedação ao reexame de prova</div>
+      <p class="tipo">"A pretensão de <span class="kw">simples reexame de prova</span> não enseja recurso especial."</p>
+      <ul>
+        <li>Distinção fina: <b>revalorar a qualificação jurídica</b> dos fatos já fixados pode; <b>rediscutir os fatos</b> não pode.</li>
+      </ul>
+    </article>
+
     <article class="alerta rv">
-      <span class="stamp">Tema quente</span>
-      <span class="art">Art. 157, §3º, II</span>
-      <h3>Latrocínio — roubo seguido de morte</h3>
-      <p>Crime complexo (roubo + homicídio), mas <b>contra o patrimônio</b>. Por isso é julgado pelo <b>juiz singular</b>, e não pelo Júri.</p>
-      <div class="sumula"><b>Súmula 603 STF</b> — competência do juiz singular (não do Tribunal do Júri).</div>
-      <div class="sumula"><b>Súmula 610 STF</b> — há latrocínio quando o <b>homicídio se consuma</b>, ainda que não haja subtração dos bens.</div>
-      <table class="tbl-mini">
-        <tr><th>Subtração</th><th>Morte</th><th>Resultado</th></tr>
-        <tr><td>consumada</td><td>consumada</td><td><span class="c">consumado</span></td></tr>
-        <tr><td>tentada</td><td>consumada</td><td><span class="c">consumado</span> (Súm. 610)</td></tr>
-        <tr><td>consumada</td><td>tentada</td><td><span class="t">tentado</span></td></tr>
-        <tr><td>tentada</td><td>tentada</td><td><span class="t">tentado</span></td></tr>
-      </table>
+      <span class="stamp">Pegadinha</span>
+      <span class="art">CF, art. 105, §§2º e 3º — EC 125/2022</span>
+      <h3>Filtro de relevância do REsp</h3>
+      <p>A EC 125/2022 criou a exigência de demonstrar a <b>relevância das questões de direito federal</b> (espelho da repercussão geral), com recusa apenas por <b>2/3 do órgão julgador</b> e hipóteses de <b>relevância presumida</b> (§3º: ações penais, improbidade, causas &gt; 500 salários mínimos, contrariedade a jurisprudência dominante do STJ etc.).</p>
+      <div class="sumula"><b>MAS atenção:</b> o filtro <b>ainda NÃO é exigível</b> — depende de lei regulamentadora que não foi aprovada. O STJ firmou isso no <b>Enunciado Administrativo n. 8</b>. Se a questão perguntar "o que falta para o filtro valer", a resposta é: <b>regulamentação infraconstitucional</b>.</div>
+      <p style="font-size:.85rem;opacity:.8">Verifique na sua CF anotada se há nota de regulamentação — até onde apurei (jurisprudência de 2025/início de 2026), continua pendente.</p>
     </article>
 
-    <article class="ficha rv">
-      <div class="art">158</div>
-      <div class="nome">Extorsão</div>
-      <p class="tipo"><span class="kw">Constranger</span> alguém, com violência/grave ameaça, a <b>fazer, tolerar ou deixar de fazer</b> algo, p/ obter vantagem econômica indevida.</p>
-      <ul>
-        <li>A <b>colaboração da vítima é imprescindível</b> (ela age: faz Pix, assina cheque…).</li>
-        <li><b>Súmula 96 STJ:</b> consuma-se mesmo sem obter a vantagem (crime formal).</li>
-        <li><b>§3º</b> "sequestro relâmpago": restrição da liberdade como condição da vantagem.</li>
-      </ul>
-      <span class="tag hot">a vítima DÁ (constrangida)</span>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">159</div>
-      <div class="nome">Extorsão mediante sequestro</div>
-      <p class="tipo">Sequestrar pessoa para obter vantagem como <span class="kw">condição ou preço do resgate</span>.</p>
-      <ul>
-        <li>Privação da liberdade é o <b>meio</b>; vantagem é o resgate.</li>
-        <li>Qualificadoras: §1º (+24h, menor/idoso, bando), §2º (lesão grave), §3º (morte).</li>
-        <li><b>§4º</b> delação premiada → reduz pena de quem facilita a libertação.</li>
-      </ul>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">160</div>
-      <div class="nome">Extorsão indireta</div>
-      <p class="tipo">Exigir/receber, como <b>garantia de dívida</b>, documento que pode dar causa a procedimento criminal contra a vítima.</p>
-      <ul><li>Ex.: agiota que exige confissão/cheque incriminador como garantia.</li></ul>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">168</div>
-      <div class="nome">Apropriação indébita</div>
-      <p class="tipo">Apropriar-se de coisa alheia móvel de que <span class="kw">já tem a posse</span> ou detenção.</p>
-      <ul>
-        <li>Posse <b>lícita na origem</b>; o dolo é <b>posterior</b> (inverte o ânimo, não devolve).</li>
-        <li>§1º aumento: depósito necessário; tutor/curador; em razão de ofício/emprego.</li>
-      </ul>
-      <span class="tag">dolo depois da posse</span>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">171</div>
-      <div class="nome">Estelionato</div>
-      <p class="tipo">Obter vantagem ilícita, em prejuízo alheio, <span class="kw">induzindo/mantendo em erro</span> mediante fraude.</p>
-      <ul>
-        <li>A fraude é <b>anterior</b> e causa a entrega — a vítima <b>entrega voluntariamente</b>.</li>
-        <li><b>§5º (Pacote Anticrime):</b> ação <b>condicionada à representação</b>. Incondicionada se a vítima for: Adm. Pública, criança/adolescente, deficiente mental, ou maior de 70/incapaz.</li>
-      </ul>
-      <span class="tag hot">vítima entrega iludida</span>
-      <span class="tag">§5º cai muito</span>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">180</div>
-      <div class="nome">Receptação</div>
-      <p class="tipo">Adquirir, receber, transportar, ocultar coisa que <span class="kw">sabe ser produto de crime</span>.</p>
-      <ul>
-        <li><b>Própria</b> (caput) × <b>imprópria</b> (influir p/ 3º de boa-fé adquirir).</li>
-        <li><b>Culposa (§3º):</b> deveria presumir origem criminosa (preço/condição).</li>
-        <li><b>§4º</b> punível ainda que desconhecido/isento o autor do crime anterior.</li>
-        <li>Qualificada: no exercício de atividade comercial/industrial.</li>
-      </ul>
-    </article>
-
-    <article class="ficha rv">
-      <div class="art">180-A</div>
-      <div class="nome">Receptação de animal</div>
-      <p class="tipo">Adquirir/receber/ter em depósito/vender <b>semovente de produção</b> (gado etc.) sabendo ser objeto de crime, com fim de produção/comércio.</p>
-      <ul><li>Lei 13.330/2016, junto ao reforço do abigeato (furto de semovente).</li></ul>
-      <span class="tag">confirmar redação no código</span>
-    </article>
-
-  </div>
-</section>
-
-<!-- ===================== IMUNIDADES ===================== -->
-<section class="grp" id="imunidades">
-  <div class="grp-head"><span class="titulo">Arts. 181–183</span><h2>Imunidades penais</h2></div>
-  <p class="grp-sub">Escusas nos crimes contra o patrimônio. Atingem só a <b>punibilidade</b> — o crime e a culpabilidade subsistem.</p>
-
-  <div class="grid">
-    <article class="ficha rv">
-      <div class="art">181</div>
-      <div class="nome">Imunidade absoluta</div>
-      <p class="tipo"><span class="kw">Isento de pena</span> quem comete crime patrimonial em prejuízo de:</p>
-      <ul>
-        <li><b>I</b> — cônjuge, na constância da sociedade conjugal;</li>
-        <li><b>II</b> — ascendente ou descendente.</li>
-        <li>Discute-se a extensão ao <b>companheiro</b> (majoritária: sim).</li>
-      </ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">182</div>
-      <div class="nome">Imunidade relativa</div>
-      <p class="tipo">Só se procede mediante <span class="kw">representação</span> se contra:</p>
-      <ul>
-        <li><b>I</b> — cônjuge separado judicialmente;</li>
-        <li><b>II</b> — irmão;</li>
-        <li><b>III</b> — tio ou sobrinho, <b>com coabitação</b>.</li>
-      </ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">183</div>
-      <div class="nome">Exceções (não há imunidade)</div>
-      <p class="tipo">Afastam 181 e 182:</p>
-      <ul>
-        <li><b>I</b> — crime com <b>violência ou grave ameaça</b> (roubo, extorsão);</li>
-        <li><b>II</b> — ao <b>estranho</b> que participa;</li>
-        <li><b>III</b> — contra <b>pessoa idosa</b> (60+; Estatuto do Idoso).</li>
-      </ul>
-    </article>
-
-    <div class="nota rv">
-      <span class="icn">⚠</span><b>Ponto de atenção / atualidade:</b> há debate sobre derrogação tácita dos arts. 181/182 pela Lei Maria da Penha nos casos de <b>violência patrimonial contra a mulher</b>. <b>Não há alteração legislativa confirmada</b> desses artigos — é discussão doutrinária/jurisprudencial. Se cair, exponha as duas posições e <b>confira a redação atual e o inciso do idoso (idade) direto no código.</b>
+    <div class="fluxo rv">
+      <div class="step"><span class="ref">art. 1.029 CPC</span><div class="h">Interposição</div><p>Petição ao <b>presidente/vice do tribunal de origem</b> (TJ/TRF). Prazo: <b>15 dias úteis</b>.</p></div>
+      <div class="step"><span class="ref">art. 1.030 CPC</span><div class="h">Juízo na origem</div><p>Presidente/vice faz o <b>1º juízo de admissibilidade</b> (admissibilidade bipartida) ou aplica regime de repetitivos.</p></div>
+      <div class="step"><span class="ref">art. 1.042 CPC</span><div class="h">Se inadmitido</div><p>Cabe <b>agravo em REsp</b> ao STJ — <b>salvo</b> se a inadmissão se baseou em <b>repetitivo/repercussão geral</b> (aí cabe <b>agravo interno</b>, art. 1.030, §2º).</p></div>
+      <div class="step"><span class="ref">arts. 1.036–1.041</span><div class="h">Repetitivos</div><p>Multiplicidade de recursos com idêntica questão → afetação, suspensão dos demais, tese vinculante.</p></div>
     </div>
+
   </div>
 </section>
 
-<!-- ===================== 273 ===================== -->
-<section class="grp" id="saude">
-  <div class="grp-head"><span class="titulo">Título VIII · Saúde pública</span><h2>Falsificação de medicamentos</h2></div>
-  <div class="grid">
-    <article class="ficha wide rv">
-      <div class="art">273</div>
-      <div class="nome">Falsificação de produto terapêutico ou medicinal</div>
-      <p class="tipo"><span class="kw">Falsificar, corromper, adulterar ou alterar</span> produto destinado a fins terapêuticos/medicinais. Equiparam-se (§§): importar, vender, expor, ter em depósito, distribuir produto falsificado, sem registro ou sem procedência.</p>
-      <ul>
-        <li>Penas <b>elevadíssimas</b> (reclusão de 10 a 15 anos — confirme no código).</li>
-        <li><b>Equiparado a crime hediondo.</b></li>
-        <li><b>Controvérsia:</b> doutrina/jurisprudência discutem a <b>desproporcionalidade</b> da pena para condutas menos graves (ex.: só falta de registro).</li>
-      </ul>
-      <span class="tag sum">hediondo</span>
-      <span class="tag">tese de proporcionalidade</span>
-    </article>
-  </div>
-</section>
+<!-- ===================== RE ===================== -->
+<section class="grp c-re" id="re">
+  <div class="grp-head"><span class="titulo">CF art. 102, III + CPC 1.029 ss.</span><h2>Recurso Extraordinário — STF</h2></div>
+  <p class="grp-sub">Guarda da <b>Constituição</b>. Mesmo tronco procedimental do REsp, mas com um requisito a mais que já está plenamente em vigor: a <b>repercussão geral</b>.</p>
 
-<!-- ===================== 288 ===================== -->
-<section class="grp" id="associacao">
-  <div class="grp-head"><span class="titulo">Art. 288</span><h2>Associação criminosa</h2></div>
   <div class="grid">
+
     <article class="ficha rv">
-      <div class="art">288</div>
-      <div class="nome">Associação criminosa</div>
-      <p class="tipo">Associarem-se <span class="kw">3 ou mais pessoas</span> para o fim específico de cometer crimes.</p>
+      <div class="art">CF 102, III</div>
+      <div class="nome">Cabimento — pressuposto</div>
+      <p class="tipo">Causas decididas em <span class="kw">única ou última instância</span> — por <b>qualquer órgão judicial</b>.</p>
       <ul>
-        <li>Antes era "quadrilha/bando" com 4+; hoje <b>3+</b> (Lei 12.850/13).</li>
-        <li>Crime autônomo e <b>permanente</b>: pune a associação estável, ainda sem os crimes-fim.</li>
-        <li>Aumento se há menor ou se é armada. <b>288-A:</b> milícia privada.</li>
+        <li>Não exige que a decisão venha de "tribunal": <b>Súmula 640 STF</b> — cabe RE contra decisão de <b>turma recursal de juizado</b> (ao contrário do REsp!).</li>
+        <li>Exige esgotamento das vias ordinárias + prequestionamento (Súmulas <b>282 e 356 STF</b>).</li>
+        <li><b>Súmula 279 STF:</b> não cabe para reexame de prova.</li>
+      </ul>
+      <span class="tag sum">Súmulas 279 · 282 · 356 · 640</span>
+    </article>
+
+    <article class="ficha rv">
+      <div class="art">Alíneas a–d</div>
+      <div class="nome">As 4 hipóteses</div>
+      <ul>
+        <li><b>a)</b> decisão que <span class="kw">contrariar dispositivo da Constituição</span>;</li>
+        <li><b>b)</b> <b>declarar a inconstitucionalidade</b> de tratado ou lei federal;</li>
+        <li><b>c)</b> julgar válida <b>lei ou ato de governo local</b> contestado em face <b>da CF</b>;</li>
+        <li><b>d)</b> julgar válida <b>lei local</b> contestada em face de <b>lei federal</b> (conflito de competência legislativa — incluída pela EC 45).</li>
+      </ul>
+      <span class="tag">ofensa deve ser DIRETA, não reflexa</span>
+    </article>
+
+    <article class="alerta rv" style="background:linear-gradient(180deg,#2a1018,#161D2B)">
+      <span class="stamp">Em vigor</span>
+      <span class="art">CF, art. 102, §3º + CPC, art. 1.035</span>
+      <h3>Repercussão geral</h3>
+      <p>O recorrente deve demonstrar questões relevantes do ponto de vista <b>econômico, político, social ou jurídico</b> que <b>ultrapassem os interesses subjetivos do processo</b> (art. 1.035, §1º). Requisito de admissibilidade exclusivo do RE.</p>
+      <div class="sumula"><b>Recusa só por 2/3</b> dos membros do STF (8 ministros) — a decisão é <b>irrecorrível</b> (art. 1.035, caput).</div>
+      <div class="sumula"><b>Presunção de repercussão (art. 1.035, §3º):</b> quando o acórdão contrariar súmula/jurisprudência dominante do STF ou tiver reconhecido inconstitucionalidade de tratado/lei federal (confira os incisos vigentes no seu CPC).</div>
+      <div class="sumula"><b>Comparação que cai em prova:</b> repercussão geral (RE) <b>já vale</b>; relevância (REsp) <b>ainda não</b> — pendente de regulamentação.</div>
+    </article>
+
+    <article class="ficha rv">
+      <div class="art">1.031–1.033</div>
+      <div class="nome">REsp + RE simultâneos & fungibilidade</div>
+      <ul>
+        <li><b>Art. 1.031:</b> interpostos os dois, julga-se <b>primeiro o REsp no STJ</b>; depois, se não prejudicado, o RE no STF (o relator no STJ pode inverter se o RE for prejudicial).</li>
+        <li><b>Art. 1.032:</b> STJ entende que a questão é constitucional → concede prazo p/ demonstrar repercussão geral e <b>remete ao STF</b>.</li>
+        <li><b>Art. 1.033:</b> STF entende que a ofensa à CF é <b>reflexa</b> → <b>remete ao STJ</b> como REsp.</li>
+      </ul>
+      <span class="tag hot">fungibilidade entre cortes</span>
+    </article>
+
+    <article class="ficha rv">
+      <div class="art">1.029, §5º</div>
+      <div class="nome">Efeitos</div>
+      <ul>
+        <li>Regra: REsp/RE <b>não têm efeito suspensivo</b> automático.</li>
+        <li>Suspensivo pode ser <b>requerido</b> (art. 1.029, §5º — a quem pedir depende do momento: tribunal superior, relator, ou presidente/vice da origem).</li>
+        <li>Não impedem, em regra, o cumprimento provisório da decisão.</li>
       </ul>
     </article>
+
+  </div>
+</section>
+
+<!-- ===================== COMPARATIVO ===================== -->
+<section class="grp" id="comparativo" style="border-top:1px solid var(--rule)">
+  <div class="grp-head"><span class="titulo" style="color:var(--ink)">Quadro-síntese</span><h2 style="color:var(--ink)">REsp × RE lado a lado</h2></div>
+  <table class="cmp rv">
+    <tr><th></th><th class="resp">Recurso Especial</th><th class="re">Recurso Extraordinário</th></tr>
+    <tr><td>Corte</td><td><b>STJ</b></td><td><b>STF</b></td></tr>
+    <tr><td>Base</td><td>CF, art. <b>105, III</b> (a, b, c)</td><td>CF, art. <b>102, III</b> (a, b, c, d)</td></tr>
+    <tr><td>Matéria</td><td>Lei <b>federal</b> infraconstitucional / tratado</td><td><b>Constituição</b> (ofensa direta)</td></tr>
+    <tr><td>De onde vem</td><td>Só de <b>TJ/TRF</b> (Súm. 203 STJ exclui turma recursal)</td><td><b>Qualquer órgão</b> em única/última instância (Súm. 640: inclui turma recursal)</td></tr>
+    <tr><td>Filtro</td><td>Relevância (EC 125/2022) — <b>ainda não exigível</b> (Enunciado Adm. 8 STJ)</td><td>Repercussão geral — <b>em pleno vigor</b> (102, §3º CF + 1.035 CPC)</td></tr>
+    <tr><td>Prova</td><td>Súmula <b>7 STJ</b> veda reexame</td><td>Súmula <b>279 STF</b> veda reexame</td></tr>
+    <tr><td>Prequestionamento</td><td colspan="2">Exigido em ambos — Súmulas 282/356 STF + prequestionamento ficto do <b>art. 1.025 CPC</b></td></tr>
+    <tr><td>Procedimento</td><td colspan="2">Comum: arts. <b>1.029 a 1.041 CPC</b> — interposição na origem, 15 dias úteis, admissibilidade bipartida, agravo do <b>1.042</b> contra inadmissão</td></tr>
+  </table>
+  <div class="macete rv"><b>Macete:</b> a fronteira é a <b>natureza da norma violada</b> — lei federal → REsp/STJ; Constituição → RE/STF. Ofensa constitucional meramente <b>reflexa</b> (que passa primeiro pela lei) não abre o RE (e o art. 1.033 manda o caso ao STJ).</div>
+</section>
+
+<!-- ===================== AGRAVO ===================== -->
+<section class="grp c-ai" id="agravo">
+  <div class="grp-head"><span class="titulo">CPC arts. 1.015–1.020</span><h2>Agravo de Instrumento</h2></div>
+  <p class="grp-sub">Recurso contra <b>decisões interlocutórias</b> de 1º grau, interposto <b>diretamente no tribunal</b>. O coração da matéria é o <b>rol do art. 1.015</b> e sua taxatividade mitigada (Tema 988 STJ).</p>
+
+  <div class="grid">
+
+    <article class="ficha rv">
+      <div class="art">1.015</div>
+      <div class="nome">Cabimento — o rol</div>
+      <p class="tipo">Cabe contra interlocutórias que versarem sobre as hipóteses dos <span class="kw">incisos I a XIII</span>. Destaques (confira todos no código):</p>
+      <ul>
+        <li><b>I</b> tutelas provisórias · <b>II</b> mérito do processo (julgamento parcial) · <b>III</b> rejeição da convenção de arbitragem;</li>
+        <li><b>VI</b> exibição/posse de documento · <b>VII</b> exclusão de litisconsorte · <b>IX</b> admissão/inadmissão de intervenção de terceiros;</li>
+        <li><b>X</b> gratuidade da justiça (concessão/revogação — veja redação) · <b>XI</b> redistribuição do ônus da prova (373, §1º).</li>
+      </ul>
+      <span class="tag">leve o CPC marcado nesses incisos</span>
+    </article>
+
+    <article class="ficha rv">
+      <div class="art">1.015, p.ú.</div>
+      <div class="nome">Cabimento amplo</div>
+      <p class="tipo">Nas fases de <span class="kw">liquidação e cumprimento de sentença</span>, no <span class="kw">processo de execução</span> e no <span class="kw">inventário</span>, cabe agravo contra <b>qualquer</b> interlocutória.</p>
+      <ul><li>Razão: nessas fases pode não haver apelação futura para concentrar a impugnação.</li></ul>
+    </article>
+
+    <article class="alerta rv" style="background:linear-gradient(180deg,#0e2522,#161D2B)">
+      <span class="stamp">Tema quente</span>
+      <span class="art">REsp repetitivos — Tema 988 STJ (2018)</span>
+      <h3>Taxatividade mitigada</h3>
+      <p>O rol do art. 1.015 é <b>de taxatividade mitigada</b>: admite-se agravo de instrumento <b>fora das hipóteses do rol</b> quando verificada a <b>urgência decorrente da inutilidade do julgamento da questão no recurso de apelação</b>.</p>
+      <div class="sumula"><b>Exemplo clássico:</b> decisão sobre <b>competência</b> não está no rol, mas esperar a apelação tornaria o reexame inútil (o processo inteiro teria corrido no juízo errado) → cabe o agravo.</div>
+      <p style="font-size:.9rem">Na discursiva: cite a tese, o fundamento (inutilidade do julgamento futuro) e dê um exemplo.</p>
+    </article>
+
+    <article class="ficha rv">
+      <div class="art">1.009, §1º</div>
+      <div class="nome">E as interlocutórias NÃO agraváveis?</div>
+      <p class="tipo"><span class="kw">Não precluem</span>: devem ser suscitadas em <b>preliminar de apelação</b> (ou nas contrarrazões).</p>
+      <ul><li>É o sistema do CPC/2015: ou a interlocutória é agravável (1.015) ou fica para a apelação (1.009, §1º) — nada fica sem remédio.</li></ul>
+      <span class="tag hot">complemento obrigatório em qualquer resposta</span>
+    </article>
+
+    <div class="fluxo rv">
+      <div class="step"><span class="ref" style="color:var(--teal)">art. 1.016</span><div class="h">Interposição</div><p><b>Direta no tribunal</b> competente (não passa pelo juiz de 1º grau). Prazo: <b>15 dias úteis</b>. Requisitos: nomes, exposição do fato/direito, razões do pedido de reforma, nome dos advogados.</p></div>
+      <div class="step"><span class="ref" style="color:var(--teal)">art. 1.017</span><div class="h">Formação do instrumento</div><p>Autos <b>físicos</b>: peças obrigatórias (cópias da decisão, certidão de intimação, procurações…). Processo <b>eletrônico</b>: dispensa as cópias (§5º).</p></div>
+      <div class="step"><span class="ref" style="color:var(--teal)">art. 1.018</span><div class="h">Comunicar a origem</div><p>Agravante <b>pode</b> juntar cópia no 1º grau; em autos físicos é <b>ônus em 3 dias</b> — descumprido e <b>arguido pelo agravado</b>, gera inadmissibilidade.</p></div>
+      <div class="step"><span class="ref" style="color:var(--teal)">art. 1.019</span><div class="h">No tribunal</div><p>Relator pode: negar/dar provimento monocrático (932), <b>atribuir efeito suspensivo</b> ou deferir <b>antecipação da tutela recursal</b>; intima agravado p/ responder em 15 dias.</p></div>
+    </div>
 
     <div class="vs rv" style="grid-column:1/-1">
-      <div class="col">
-        <div class="art">Art. 29 CP</div>
-        <div class="h">Concurso de pessoas</div>
-        <p>2+ pessoas, vínculo <b>eventual</b>, para um crime determinado.</p>
-      </div>
-      <div class="col">
-        <div class="art">Art. 288 CP</div>
-        <div class="h">Associação criminosa</div>
-        <p><b>3+</b>, vínculo <b>permanente</b>, fins indeterminados.</p>
-      </div>
-      <div class="col">
-        <div class="art">Lei 12.850/13</div>
-        <div class="h">Organização criminosa</div>
-        <p><b>4+</b>, estrutura ordenada, divisão de tarefas, visa vantagem (crimes c/ pena máx. &gt; 4 anos ou transnacionais).</p>
-      </div>
+      <div class="col"><div class="art" style="color:var(--teal)">CPC 1.015</div><div class="h">Agravo de instrumento</div><p>Contra <b>interlocutória de 1º grau</b> → vai ao TJ/TRF.</p></div>
+      <div class="col"><div class="art" style="color:var(--teal)">CPC 1.021</div><div class="h">Agravo interno</div><p>Contra <b>decisão monocrática de relator</b> → vai ao colegiado do próprio tribunal.</p></div>
+      <div class="col"><div class="art" style="color:var(--teal)">CPC 1.042</div><div class="h">Agravo em REsp/RE</div><p>Contra <b>inadmissão do REsp/RE na origem</b> → sobe ao STJ/STF (salvo fundamento em repetitivo → agravo interno).</p></div>
     </div>
-  </div>
-</section>
+    <div class="macete rv" style="grid-column:1/-1"><b>Não confunda os agravos:</b> instrumento = interlocutória de 1º grau · interno = monocrática de relator · 1.042 = destrancar REsp/RE inadmitido.</div>
 
-<!-- ===================== FALSO DOCUMENTAL ===================== -->
-<section class="grp" id="falso">
-  <div class="grp-head"><span class="titulo">Arts. 297–304</span><h2>Falso documental</h2></div>
-  <p class="grp-sub"><b>Material</b> = falsifica a forma/estrutura (297/298). <b>Ideológica</b> = documento perfeito, conteúdo mentiroso (299). <b>Uso</b> = usar o falso (304).</p>
-  <div class="grid">
-    <article class="ficha rv">
-      <div class="art">297</div>
-      <div class="nome">Doc. público (material)</div>
-      <p class="tipo"><span class="kw">Falsificar ou alterar</span> documento público (cria/modifica o papel).</p>
-      <ul><li>§3º/§4º: falsidade documental previdenciária.</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">298</div>
-      <div class="nome">Doc. particular (material)</div>
-      <p class="tipo">Mesma conduta material sobre documento particular.</p>
-      <ul><li><b>Parágrafo único:</b> equipara-se <b>cartão de crédito/débito</b> (clonagem).</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">299</div>
-      <div class="nome">Falsidade ideológica</div>
-      <p class="tipo"><span class="kw">Inserir declaração falsa</span> (ou omitir a devida) em documento — a forma é verdadeira, o conteúdo é falso.</p>
-      <ul><li>Ex.: declarar endereço falso em formulário autêntico.</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">304</div>
-      <div class="nome">Uso de documento falso</div>
-      <p class="tipo"><span class="kw">Fazer uso</span> de qualquer dos documentos falsos (arts. 297–302). Pena = a da falsificação.</p>
-      <ul><li><b>Falsifica + usa:</b> majoritária → responde só pela falsificação (<b>consunção</b>; uso é exaurimento).</li></ul>
-      <span class="tag">consunção</span>
-    </article>
   </div>
-</section>
-
-<!-- ===================== ADM PÚBLICA ===================== -->
-<section class="grp" id="adm">
-  <div class="grp-head"><span class="titulo">Título XI</span><h2>Contra a administração pública</h2></div>
-  <p class="grp-sub">Funcionário público (art. 327) × particular × administração da justiça. O <b>verbo nuclear</b> separa concussão, corrupção e prevaricação.</p>
-  <div class="grid">
-    <article class="ficha rv">
-      <div class="art">312</div>
-      <div class="nome">Peculato</div>
-      <p class="tipo">Funcionário <span class="kw">apropria-se ou desvia</span> bem de que tem a posse em razão do cargo.</p>
-      <ul>
-        <li><b>§1º</b> peculato-furto: não tem a posse, mas subtrai com a facilidade do cargo.</li>
-        <li><b>§2º/§3º</b> culposo: reparação antes da sentença <b>extingue a punibilidade</b>; depois, reduz pela metade.</li>
-      </ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">316</div>
-      <div class="nome">Concussão</div>
-      <p class="tipo">Funcionário <span class="kw">EXIGE</span> vantagem indevida (impõe pelo peso do cargo).</p>
-      <ul><li><b>§1º</b> excesso de exação: exige tributo indevido / cobra de modo vexatório.</li></ul>
-      <span class="tag hot">exigir</span>
-    </article>
-    <article class="ficha rv">
-      <div class="art">317</div>
-      <div class="nome">Corrupção passiva</div>
-      <p class="tipo">Funcionário <span class="kw">solicita, recebe ou aceita promessa</span> de vantagem (pede/anui, não impõe).</p>
-      <ul><li><b>§2º</b> privilegiada: cede a pedido de outrem, sem vantagem.</li></ul>
-      <span class="tag hot">solicitar/receber/aceitar</span>
-    </article>
-    <article class="ficha rv">
-      <div class="art">319</div>
-      <div class="nome">Prevaricação</div>
-      <p class="tipo">Retardar/omitir/praticar ato contra a lei <span class="kw">por interesse ou sentimento pessoal</span>.</p>
-      <ul><li>Sem vantagem de terceiro — distingue-se da corrupção passiva.</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">319-A</div>
-      <div class="nome">Prevaricação (presídio)</div>
-      <p class="tipo">Diretor/agente <b>deixa de vedar ao preso</b> o acesso a aparelho telefônico/rádio que permita comunicação.</p>
-      <span class="tag">confirmar redação</span>
-    </article>
-    <article class="ficha rv">
-      <div class="art">333</div>
-      <div class="nome">Corrupção ativa</div>
-      <p class="tipo">Particular <span class="kw">oferece ou promete</span> vantagem a funcionário p/ ato de ofício.</p>
-      <ul><li>Independente da passiva (não exige bilateralidade).</li></ul>
-      <span class="tag hot">oferecer/prometer</span>
-    </article>
-    <article class="ficha rv">
-      <div class="art">339</div>
-      <div class="nome">Denunciação caluniosa</div>
-      <p class="tipo"><span class="kw">Dar causa a investigação/processo</span> contra quem sabe inocente, imputando-lhe crime.</p>
-      <ul><li>≠ calúnia (138): aqui há movimentação do aparato investigativo/judicial.</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">342</div>
-      <div class="nome">Falso testemunho / perícia</div>
-      <p class="tipo">Testemunha/perito <span class="kw">faz afirmação falsa</span> ou cala a verdade.</p>
-      <ul>
-        <li>Crime de <b>mão própria</b>.</li>
-        <li><b>§2º</b> retratação até a sentença <b>extingue a punibilidade</b>.</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-<!-- ===================== ESTADO DEMOCRÁTICO ===================== -->
-<section class="grp" id="estado">
-  <div class="grp-head"><span class="titulo">Título XII · Lei 14.197/2021</span><h2>Estado Democrático de Direito</h2></div>
-  <div class="grid">
-    <div class="nota rv">
-      <span class="icn">⚠</span><b>Atenção à classificação:</b> os arts. <b>359-L e 359-M</b> NÃO são da Administração Pública (Título XI). Pertencem ao <b>Título XII — Crimes contra o Estado Democrático de Direito</b>. Na hora de tipificar, situe-os corretamente.
-    </div>
-    <article class="ficha rv">
-      <div class="art">359-L</div>
-      <div class="nome">Abolição violenta do Estado Democrático</div>
-      <p class="tipo"><span class="kw">Tentar, com violência/grave ameaça, abolir</span> o Estado Democrático de Direito, impedindo/restringindo os poderes constitucionais.</p>
-      <ul><li>Crime de atentado: a tentativa já é punida como consumação.</li></ul>
-    </article>
-    <article class="ficha rv">
-      <div class="art">359-M</div>
-      <div class="nome">Golpe de Estado</div>
-      <p class="tipo"><span class="kw">Tentar depor</span>, por violência/grave ameaça, o <b>governo legitimamente constituído</b>.</p>
-      <ul><li>359-L mira o regime/poderes; 359-M mira a deposição do governo.</li></ul>
-    </article>
-  </div>
-</section>
-
-<!-- ===================== DISTINÇÕES ===================== -->
-<section class="grp" id="distincoes">
-  <div class="grp-head"><span class="titulo">O ouro da discursiva</span><h2>Quadros de distinção</h2></div>
-
-  <h3 style="font-size:1.15rem;text-transform:uppercase;color:var(--oxblood);margin:.4rem 0 .2rem">Furto × Roubo × Extorsão</h3>
-  <div class="vs rv">
-    <div class="col"><div class="art">155</div><div class="h">Furto</div><p>O agente subtrai, sem violência. Vítima passiva.</p><div class="key">Meio: <b>nenhuma</b> violência</div></div>
-    <div class="col"><div class="art">157</div><div class="h">Roubo</div><p>O agente <b>toma</b> o bem com violência/ameaça.</p><div class="key">Colaboração da vítima <b>dispensável</b></div></div>
-    <div class="col"><div class="art">158</div><div class="h">Extorsão</div><p>A vítima é constrangida a <b>colaborar</b> (faz/tolera).</p><div class="key">Colaboração <b>imprescindível</b></div></div>
-  </div>
-  <div class="macete rv"><b>Macete:</b> Roubo = o agente TIRA · Extorsão = a vítima DÁ (constrangida). Colaboração dispensável → roubo; indispensável → extorsão.</div>
-
-  <h3 style="font-size:1.15rem;text-transform:uppercase;color:var(--oxblood);margin:.4rem 0 .2rem">Apropriação × Estelionato × Furto mediante fraude</h3>
-  <div class="vs rv">
-    <div class="col"><div class="art">168</div><div class="h">Apropriação indébita</div><p>Posse <b>lícita</b> na origem.</p><div class="key">Dolo <b>posterior</b> à posse</div></div>
-    <div class="col"><div class="art">171</div><div class="h">Estelionato</div><p>Vítima <b>entrega</b> iludida.</p><div class="key">Fraude <b>anterior</b>, causa a entrega</div></div>
-    <div class="col"><div class="art">155 §4º II</div><div class="h">Furto mediante fraude</div><p>Vítima <b>não entrega</b>; fraude reduz vigilância.</p><div class="key">Agente <b>subtrai</b></div></div>
-  </div>
-
-  <h3 style="font-size:1.15rem;text-transform:uppercase;color:var(--oxblood);margin:.4rem 0 .2rem">Concussão × Corrupção passiva × Corrupção ativa</h3>
-  <div class="vs rv">
-    <div class="col"><div class="art">316 · funcionário</div><div class="h">Concussão</div><p>Verbo: <b>EXIGIR</b> (impõe pelo cargo).</p></div>
-    <div class="col"><div class="art">317 · funcionário</div><div class="h">Corrupção passiva</div><p>Verbo: <b>SOLICITAR / RECEBER / ACEITAR</b>.</p></div>
-    <div class="col"><div class="art">333 · particular</div><div class="h">Corrupção ativa</div><p>Verbo: <b>OFERECER / PROMETER</b>.</p></div>
-  </div>
-  <div class="macete rv"><b>Lembre:</b> Concussão × Extorsão → na concussão o medo vem da <b>autoridade do cargo</b>; na extorsão há violência/grave ameaça <b>concreta</b>. Corrupção passiva × Prevaricação → passiva tem <b>vantagem</b>; prevaricação é por <b>interesse pessoal</b>.</div>
 </section>
 
 <!-- ===================== SIMULADO ===================== -->
 <section id="simulado">
   <div class="sim-wrap">
     <div class="sim-intro rv">
-      <span class="eyebrow">Treino final</span>
-      <h2>Simulado discursivo</h2>
-      <p>5 questões no formato da sua prova. Responda primeiro por escrito seguindo o roteiro <b>tipifique → elemento decisivo → distinga do vizinho → súmula → conclua</b>. Só então revele o gabarito comentado.</p>
-      <p style="font-size:.85rem;color:#9A998F">Estas questões foram montadas como treino — <b>não</b> são as questões reais da sua avaliação.</p>
+      <span class="eyebrow">Treino final — formato da prova</span>
+      <h2>Simulado: 3 questões com a) b) c)</h2>
+      <p>Uma questão por recurso, no formato da sua prova. Responda por escrito <b>citando os artigos do CPC e da CF</b> (você terá os códigos!), depois revele o gabarito comentado.</p>
+      <p style="font-size:.85rem;color:#9A998F">Questões de treino que eu elaborei — <b>não</b> são as questões reais da sua avaliação.</p>
     </div>
 
-    <article class="q rv">
-      <div class="num"><span class="n">1</span><span class="theme">Roubo × Extorsão</span></div>
-      <p class="enun">"A" aborda "B" na rua, aponta uma faca e diz "passa o celular"; "B" entrega. <b>Hipótese 2:</b> em vez de pegar o aparelho, "A" obriga "B" a desbloquear o app e fazer um Pix para a conta de "A". Tipifique <b>cada</b> hipótese e justifique a diferença.</p>
+    <!-- Q1 RESP -->
+    <article class="q qresp rv">
+      <div class="num"><span class="n">1</span><span class="theme">Recurso Especial</span></div>
+      <p class="caso">O TJ-SP, em apelação, manteve sentença aplicando o art. X do Código Civil de forma contrária à interpretação consolidada pelo TJ-RS em casos idênticos. A parte vencida opôs embargos de declaração apontando omissão sobre a questão federal; os embargos foram rejeitados sem que o tribunal se manifestasse sobre o ponto.</p>
+      <ol class="itens">
+        <li><span class="let">a)</span> Qual recurso é cabível, para qual tribunal, e com base em qual dispositivo constitucional e alínea?</li>
+        <li><span class="let">b)</span> O requisito do prequestionamento está atendido? Fundamente com o dispositivo do CPC aplicável.</li>
+        <li><span class="let">c)</span> Se o presidente do TJ-SP inadmitir o recurso, qual o meio de impugnação e há alguma exceção?</li>
+      </ol>
       <details class="gab">
         <summary>Revelar gabarito</summary>
         <div class="gab-body">
-          <p><span class="label">Hipótese 1 — Roubo (art. 157)</span></p>
-          <p>Há subtração de coisa móvel mediante <b>grave ameaça</b> (faca). A entrega do aparelho é irrelevante: o agente toma o bem; a colaboração da vítima é <b>dispensável</b>. Possível majorante por arma branca (<span class="ref">157, §2º</span> — confira o inciso).</p>
-          <p><span class="label">Hipótese 2 — Extorsão (art. 158)</span></p>
-          <p>O agente <b>constrange</b> a vítima a <b>fazer</b> algo (desbloquear e transferir) para obter vantagem econômica indevida. A <b>colaboração da vítima é imprescindível</b> — sem o ato dela não há proveito. Consuma-se com o constrangimento, <b>independentemente</b> de o Pix cair (<span class="ref">Súmula 96 STJ</span>).</p>
-          <p><span class="label">Distinção</span> Roubo = o agente tira; extorsão = a vítima dá, constrangida.</p>
+          <p><span class="label">a)</span> Cabe <b>Recurso Especial ao STJ</b>, com fundamento no <span class="ref">art. 105, III, "c", da CF</span> — o acórdão deu à lei federal interpretação <b>divergente</b> da atribuída por outro tribunal (dissídio jurisprudencial). Exige-se a demonstração do dissídio por <b>cotejo analítico</b> (<span class="ref">art. 1.029, §1º, CPC</span>). Caberia cogitar também a alínea "a" (contrariedade à lei federal), se for o caso de violação direta.</p>
+          <p><span class="label">b)</span> Sim, pelo <b>prequestionamento ficto</b> do <span class="ref">art. 1.025 do CPC</span>: consideram-se incluídos no acórdão os elementos suscitados nos embargos de declaração, ainda que rejeitados, para fins de prequestionamento, desde que o tribunal superior reconheça a omissão (também conjugar Súmulas 282/356 STF). A parte fez exatamente o que a lei exige: opôs os embargos para provocar a manifestação.</p>
+          <p><span class="label">c)</span> Contra a inadmissão na origem cabe <b>agravo em recurso especial</b> (<span class="ref">art. 1.042, CPC</span>), dirigido ao STJ. <b>Exceção:</b> se a inadmissão se fundou em entendimento firmado em <b>recurso repetitivo ou repercussão geral</b> (<span class="ref">art. 1.030, I e §2º</span>), o recurso cabível é o <b>agravo interno</b> para o órgão colegiado do próprio tribunal de origem.</p>
         </div>
       </details>
     </article>
 
-    <article class="q rv">
-      <div class="num"><span class="n">2</span><span class="theme">Latrocínio · consumação</span></div>
-      <p class="enun">Durante um assalto, "C" atira para matar a vítima a fim de subtrair seus bens; a vítima morre, mas "C" foge sem levar nada. Qual o crime e em que grau (consumado/tentado)? Qual o juízo competente para julgá-lo? Fundamente.</p>
+    <!-- Q2 RE -->
+    <article class="q qre rv">
+      <div class="num"><span class="n">2</span><span class="theme">Recurso Extraordinário</span></div>
+      <p class="caso">Uma turma recursal de juizado especial cível confirma sentença que aplicou lei municipal, rejeitando a alegação de que a norma viola diretamente o art. Y da Constituição Federal.</p>
+      <ol class="itens">
+        <li><span class="let">a)</span> Cabe recurso extraordinário contra decisão de turma recursal? E recurso especial? Fundamente (CF + súmulas).</li>
+        <li><span class="let">b)</span> Em qual alínea do art. 102, III, da CF a hipótese se enquadra?</li>
+        <li><span class="let">c)</span> Explique o requisito da repercussão geral: previsão, conceito, quórum de recusa e ao menos uma hipótese de presunção.</li>
+      </ol>
       <details class="gab">
         <summary>Revelar gabarito</summary>
         <div class="gab-body">
-          <p><span class="label">Tipificação — Latrocínio consumado</span></p>
-          <p>Roubo seguido de morte (<span class="ref">157, §3º, II</span>). Pela <b>Súmula 610 do STF</b>, há latrocínio <b>consumado</b> quando o <b>homicídio se consuma</b>, ainda que o agente <b>não consiga subtrair</b> os bens. Logo, a fuga sem o produto não descaracteriza a consumação.</p>
-          <p><span class="label">Competência — juiz singular</span></p>
-          <p>Embora envolva morte, o latrocínio é crime <b>contra o patrimônio</b>. Pela <b>Súmula 603 do STF</b>, a competência é do <b>juiz singular</b>, e <b>não</b> do Tribunal do Júri.</p>
+          <p><span class="label">a)</span> <b>RE: sim.</b> O <span class="ref">art. 102, III, CF</span> exige apenas causa decidida em única/última instância, sem exigir que venha de "tribunal" — e a <b>Súmula 640 do STF</b> admite RE contra decisão de turma recursal. <b>REsp: não.</b> O <span class="ref">art. 105, III, CF</span> exige decisão de <b>TJ ou TRF</b>, e a <b>Súmula 203 do STJ</b> veda REsp contra decisão de turma recursal de juizado.</p>
+          <p><span class="label">b)</span> <span class="ref">Art. 102, III, "c", CF</span>: a decisão <b>julgou válida lei (ou ato) de governo local contestada em face da Constituição</b>. (Cuidado para não confundir com a alínea "d", que trata de lei local contestada em face de <b>lei federal</b>.) Pode-se cumular a alínea "a" se houver contrariedade direta a dispositivo constitucional. A ofensa deve ser <b>direta</b>, não reflexa.</p>
+          <p><span class="label">c)</span> Prevista no <span class="ref">art. 102, §3º, CF</span> e regulamentada pelo <span class="ref">art. 1.035 do CPC</span>. Conceito (§1º): questões relevantes do ponto de vista <b>econômico, político, social ou jurídico que ultrapassem os interesses subjetivos do processo</b>. A recusa exige <b>2/3 dos membros do STF</b> e é irrecorrível. Presunção (§3º): quando o acórdão <b>contrariar súmula ou jurisprudência dominante do STF</b> ou tiver <b>reconhecido a inconstitucionalidade de tratado ou lei federal</b> (confira incisos vigentes). Bônus: no REsp, o filtro equivalente (relevância, EC 125/2022) ainda <b>não é exigível</b> por falta de regulamentação.</p>
         </div>
       </details>
     </article>
 
-    <article class="q rv">
-      <div class="num"><span class="n">3</span><span class="theme">Peculato × Apropriação</span></div>
-      <p class="enun">Um caixa de uma autarquia, aproveitando o acesso que o cargo lhe dá, transfere para si valores de contas de terceiros sob a guarda do órgão. Classifique a conduta e distinga de figura patrimonial semelhante.</p>
+    <!-- Q3 AGRAVO -->
+    <article class="q qai rv">
+      <div class="num"><span class="n">3</span><span class="theme">Agravo de Instrumento</span></div>
+      <p class="caso">Na fase de conhecimento, o juiz: (i) indefere a tutela de urgência pedida pelo autor; (ii) rejeita a alegação de incompetência relativa, mantendo o processo na comarca. O autor pretende recorrer de ambas imediatamente.</p>
+      <ol class="itens">
+        <li><span class="let">a)</span> A decisão (i) é agravável? Indique o dispositivo, o prazo e o juízo perante o qual o recurso é interposto.</li>
+        <li><span class="let">b)</span> A decisão (ii) está no rol do art. 1.015. É possível agravá-la mesmo assim? Explique a tese aplicável.</li>
+        <li><span class="let">c)</span> Se nenhum agravo for cabível/interposto contra uma interlocutória, a questão preclui? O que pode o relator fazer quanto aos efeitos do agravo interposto?</li>
+      </ol>
       <details class="gab">
         <summary>Revelar gabarito</summary>
         <div class="gab-body">
-          <p><span class="label">Peculato-furto (art. 312, §1º)</span></p>
-          <p>O agente é <b>funcionário público</b> (<span class="ref">art. 327</span>, inclusive autarquia). Como ele <b>não tinha a posse</b> dos valores, mas os subtrai valendo-se da <b>facilidade do cargo</b>, configura-se o <b>peculato-furto</b> (§1º), e não o peculato-apropriação (caput, que pressupõe posse prévia).</p>
-          <p><span class="label">Distinção</span></p>
-          <p>Não é mera apropriação indébita comum (<span class="ref">168</span>) porque a qualidade de funcionário e o nexo com o cargo deslocam a conduta para os crimes contra a Administração Pública.</p>
-        </div>
-      </details>
-    </article>
-
-    <article class="q rv">
-      <div class="num"><span class="n">4</span><span class="theme">Concussão × Corrupção × Extorsão</span></div>
-      <p class="enun">Um fiscal diz ao comerciante: "ou você me paga R$ 2 mil, ou eu interdito seu estabelecimento hoje". Tipifique e distinga das figuras vizinhas (corrupção passiva e extorsão).</p>
-      <details class="gab">
-        <summary>Revelar gabarito</summary>
-        <div class="gab-body">
-          <p><span class="label">Concussão (art. 316)</span></p>
-          <p>O funcionário <b>exige</b> vantagem indevida em razão da função, usando o <b>poder do cargo</b> (ameaça de interdição). O verbo nuclear é <b>EXIGIR</b>.</p>
-          <p><span class="label">Por que não corrupção passiva (317)</span></p>
-          <p>Na corrupção passiva o funcionário <b>solicita/recebe/aceita</b> — pede ou anui, não impõe. Aqui há imposição.</p>
-          <p><span class="label">Por que não extorsão (158)</span></p>
-          <p>A intimidação decorre da <b>autoridade do cargo</b> (<i>metus publicae potestatis</i>), não de violência ou grave ameaça concreta. Se o agente usasse arma/violência física além do poder funcional, a discussão migraria para extorsão.</p>
-        </div>
-      </details>
-    </article>
-
-    <article class="q rv">
-      <div class="num"><span class="n">5</span><span class="theme">Estelionato · ação penal</span></div>
-      <p class="enun">"D" recebe por e-mail um boleto falso, é induzido a crer que é legítimo e paga voluntariamente o valor a "E". Tipifique a conduta de "E", distinga do furto mediante fraude e indique <b>quem tem a iniciativa da ação penal</b> e suas exceções.</p>
-      <details class="gab">
-        <summary>Revelar gabarito</summary>
-        <div class="gab-body">
-          <p><span class="label">Estelionato (art. 171)</span></p>
-          <p>"E" obteve vantagem ilícita induzindo "D" em <b>erro</b> mediante fraude (boleto falso). A vítima, iludida, <b>entrega voluntariamente</b> o valor — fraude <b>anterior</b> que causa a entrega.</p>
-          <p><span class="label">Distinção do furto mediante fraude (155, §4º, II)</span></p>
-          <p>No furto a vítima <b>não entrega</b>; a fraude apenas reduz a vigilância e o agente subtrai. Aqui houve entrega voluntária → estelionato.</p>
-          <p><span class="label">Ação penal (§5º)</span></p>
-          <p>Regra: <b>pública condicionada à representação</b> da vítima. Permanece <b>incondicionada</b> se a vítima for: <b>Administração Pública</b> (direta/indireta); <b>criança ou adolescente</b>; <b>pessoa com deficiência mental</b>; <b>maior de 70 anos ou incapaz</b> (<span class="ref">art. 171, §5º, I–IV</span>).</p>
+          <p><span class="label">a)</span> Sim: decisão sobre <b>tutela provisória</b> é expressamente agravável — <span class="ref">art. 1.015, I, CPC</span>. Prazo de <b>15 dias úteis</b> (<span class="ref">arts. 1.003, §5º e 219</span>), com interposição <b>diretamente no tribunal</b> competente (<span class="ref">art. 1.016</span>), e não perante o juiz de 1º grau.</p>
+          <p><span class="label">b)</span> A decisão sobre <b>competência não consta do rol</b> do art. 1.015. Ainda assim, é possível o agravo pela tese da <b>taxatividade mitigada</b> (<b>Tema 988 do STJ</b>, repetitivo): admite-se agravo fora do rol quando houver <b>urgência decorrente da inutilidade do julgamento da questão na futura apelação</b> — exatamente o caso da competência, pois aguardar a apelação deixaria todo o processo correr perante juízo possivelmente incompetente.</p>
+          <p><span class="label">c)</span> Não preclui: pelo <span class="ref">art. 1.009, §1º, CPC</span>, as interlocutórias não agraváveis devem ser suscitadas em <b>preliminar de apelação</b> ou nas contrarrazões — o sistema não deixa a questão sem remédio. Quanto aos efeitos: o agravo não tem efeito suspensivo automático, mas o <b>relator</b> pode <b>atribuir efeito suspensivo ou deferir a antecipação da tutela recursal</b> (<span class="ref">art. 1.019, I, CPC</span>, c/c art. 995, p.ú.).</p>
         </div>
       </details>
     </article>
@@ -711,18 +505,16 @@
   <div class="avisos rv">
     <h3>⚠ Avisos de precisão — leia antes da prova</h3>
     <ul>
-      <li><b>Penas e frações</b> não foram memorizadas aqui: confira sempre no <b>código</b>, que você terá em mãos.</li>
-      <li><b>Redações sujeitas a atualização:</b> 155 (§§ recentes), 171 (figuras eletrônicas), 181–183, 273, 319-A, 359-L/M. Onde marquei "confirmar redação", confirme de fato.</li>
-      <li><b>359-L e 359-M</b> são crimes contra o <b>Estado Democrático de Direito</b> (Título XII), não Administração Pública.</li>
-      <li><b>Imunidades (181–183):</b> mantive a estrutura clássica; o debate sobre a Lei Maria da Penha é doutrinário, sem alteração legislativa confirmada por mim.</li>
-      <li><b>Súmulas/jurisprudência</b> citadas (STF 603/610, STJ 96, §5º do 171) são as consolidadas. Se seu professor cobra posição doutrinária diversa, prevaleça a dele.</li>
-      <li>Este é um <b>guia de estudo</b>, não fonte oficial. A fonte é o texto vigente do Código Penal.</li>
+      <li><b>Redação literal dos incisos</b> (rol do 1.015, presunções do 1.035, §3º, alíneas da CF): confira no <b>código</b> — você o terá em mãos; cite os números exatos a partir dele.</li>
+      <li><b>Filtro de relevância do REsp (EC 125/2022):</b> pela jurisprudência que verifiquei (até início de 2026), <b>ainda não exigível</b> — Enunciado Administrativo 8 do STJ, pendente de lei regulamentadora. Se sua CF anotada indicar regulamentação superveniente, prevaleça ela.</li>
+      <li><b>Tema 988 STJ</b> (taxatividade mitigada) é jurisprudência consolidada (repetitivo de 2018), mas verifique se seu professor adota nomenclatura/posição específica.</li>
+      <li>Não memorizei <b>prazos excepcionais</b> ou minúcias de contagem além do padrão de 15 dias úteis — qualquer dúvida, o CPC resolve na hora.</li>
+      <li>Este é um <b>guia de estudo</b>, não fonte oficial. As fontes são o CPC e a CF vigentes.</li>
     </ul>
   </div>
 </footer>
 
 <script>
-  // scroll reveal (respeita prefers-reduced-motion)
   (function(){
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var els = document.querySelectorAll('.rv');
